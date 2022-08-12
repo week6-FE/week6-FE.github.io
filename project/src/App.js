@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import Router from '../src/shared/Router.js';
+
 
 function App() {
   return (
-    <div className="App">
-      hello world
-    </div>
+    <Router />
   );
 }
 
