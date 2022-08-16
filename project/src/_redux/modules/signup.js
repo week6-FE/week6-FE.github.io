@@ -27,8 +27,12 @@ export const __getLoginUser = createAsyncThunk(
   "user/getLoginUser",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(`${DATA_URL2}user`);
-      console.log(data);
+      const data = await axios
+        .get(`${DATA_URL}api/member/login`)
+        .then((response) => {
+          console.log(response);
+        });
+      console.log(payload);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -42,19 +46,19 @@ export const __postLoginUser = createAsyncThunk(
     try {
       const data = await axios
         .post(`${DATA_URL}api/member/login`, loginUser)
+        // .post(`${DATA_URL2}user`, loginUser)
         .then((response) => {
-          console.log(response);
           const accessToken = response.headers.authorization;
           const refreshToken = response.headers["refresh-token"];
           if (response.status === 200 || response.status === 201) {
+            // console.log(response);
             window.localStorage.setItem("accessToken", accessToken);
             window.localStorage.setItem("refreshToken", refreshToken);
             alert("로그인 성공");
-            window.location.href("/");
+            // window.location.replace("/");
+            return thunkAPI.fulfillWithValue(data.data);
           }
-          // window.sessionStorage.setItem("is_first", RefreshToken);
         });
-      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       if (400 < error.response.status && error.response.status < 500) {
         window.location.reload();
@@ -66,11 +70,7 @@ export const __postLoginUser = createAsyncThunk(
 );
 
 const initialState = {
-  user: {
-    nickname: "",
-    loginId: "",
-    password: "",
-  },
+  user: null,
   isLoading: false,
   error: null,
 };
@@ -78,8 +78,30 @@ const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  extraReducers: {},
+  extraReducers: {
+    // [__getLoginUser.pending]: (state) => {
+    //   state.isLoading = true;
+    // },
+    [__getLoginUser.fulfilled]: (state, action) => {
+      // state.isLoading = false;
+      // console.log(action.payload);
+      state.user = action.payload;
+      console.log(action.payload);
+    },
+    // [__getLoginUser.rejected]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
+    [__postUser.fulfilled]: (state, action) => {
+      state.user.push(action.data);
+      console.log(state);
+    },
+    [__postLoginUser.fulfilled]: (state, action) => {
+      console.log("aaaa");
+      // state.user.push(action.payload);
+    },
+  },
 });
 
-// export const {} = userSlice.actions;
+export const {} = userSlice.actions;
 export default userSlice.reducer;

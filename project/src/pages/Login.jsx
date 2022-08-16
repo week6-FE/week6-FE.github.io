@@ -42,7 +42,8 @@ const LoginTitleContainer = styled.div`
   background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
   letter-spacing: 10px;
   position: relative;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 `;
 
 const flicker = keyframes`
@@ -298,7 +299,7 @@ const LoginInputWrapper = styled.div`
     width: 100%;
     height: 100%;
     pointer-events: none;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid black;
   }
   label::after {
     content: "";
@@ -307,26 +308,28 @@ const LoginInputWrapper = styled.div`
     left: 0px;
     width: 100%;
     height: 100%;
-    border-bottom: 3px solid #fce38a;
-    transform: translateX(-100%);
+    border-bottom: 3px solid rgba(105, 171, 224, 1);
+    opacity: 0;
+    transform: translateX(100%);
     transition: all 0.3s ease;
   }
   .content-name {
     position: absolute;
     bottom: 0px;
     left: 0px;
-    padding-bottom: 5px;
     transition: all 0.3s ease;
   }
 `;
 
 const LoginInput = styled.input`
-  width: 100%;
+  width: 95%;
   height: 100%;
-  color: #fff;
+  color: black;
   padding-top: 20px;
   border: none;
-  background-color: #f38181;
+  background-color: transparent;
+  padding-left: 40px;
+  font-size: 0.9em;
   &:focus {
     outline: none;
   }
@@ -334,11 +337,11 @@ const LoginInput = styled.input`
     transform: translateY(-150%);
     font-size: 14px;
     left: 0px;
-    color: #fce38a;
+    color: rgba(105, 171, 224, 1);
   }
-  &:focus + .label-name::after,
-  &:valid + .label-name::after {
+  &:focus + .label-name::after {
     transform: translateX(0%);
+    opacity: 1;
   }
 `;
 
@@ -430,26 +433,17 @@ const Login = () => {
             >
               <MainButton onClick={moveMain}>Main Page</MainButton>
             </div>
-            <span style={{ fontSize: "40px", fontWeight: "500" }}>Login</span>
+            <span style={{ fontSize: "40px", fontWeight: "600" }}>Login</span>
             <FormInnerWrapper>
               <LoginForm onSubmit={handleLogin}>
                 <LoginInputWrapper>
-                  {/* <span
-                    style={{
-                      display: "flex",
-                      width: "70px",
-                      color: "#3ca3f7",
-                    }}
-                  >
-                    ID
-                  </span> */}
                   <LoginInput
                     type="text"
                     value={loginId}
                     onChange={onChangeId}
                   />
-                  <label for="text" class="label-name">
-                    <span class="content-name">ID</span>
+                  <label htmlFor="text" className="label-name">
+                    <span className="content-name">ID:</span>
                   </label>
                 </LoginInputWrapper>
                 <LoginInputWrapper>
@@ -458,8 +452,8 @@ const Login = () => {
                     value={password}
                     onChange={onChangePassword}
                   />
-                  <label for="text" class="label-name">
-                    <span class="content-name">PW</span>
+                  <label htmlFor="text" className="label-name">
+                    <span className="content-name">PW:</span>
                   </label>
                 </LoginInputWrapper>
                 <div style={{ display: "flex", marginTop: "60px" }}>

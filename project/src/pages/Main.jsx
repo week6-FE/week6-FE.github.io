@@ -1,17 +1,34 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { __getLoginUser } from "../_redux/modules/signup";
+import { __getLoginUser, __postLoginUser } from "../_redux/modules/signup";
+
+const MainContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const Main = () => {
+  const userInfo = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
+  // console.log(userInfo);
+
+  // useEffect(() => {
+  //   dispatch(__getLoginUser());
+  // }, []);
+
   useEffect(() => {
-    dispatch(__getLoginUser());
+    fetch("http://15.164.234.179/api/member/login")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
   }, []);
 
-  //   console.log(__getLoginUser);
-  return <>main</>;
+  return (
+    <>
+      <MainContainer>main</MainContainer>
+    </>
+  );
 };
 
 export default Main;
