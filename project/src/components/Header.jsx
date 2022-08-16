@@ -7,14 +7,20 @@ import Logo from "../image/logo.svg";
 
 // components
 import Button from "../components/Button"
-
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Header = () => {
+    const navigate = useNavigate();
+
+    const main = () => {
+        navigate("/")
+    }
+
     return (
         <>
             <HeaderWrap>
-                <img src={Logo} alt="logo" />
-                <Button btn="로그인" />
+                <img src={Logo} alt="logo" onClick={main} style={{ cursor: 'pointer' }} />
+                {/* <Button btn="로그인" /> */}
             </HeaderWrap>
         </>
     );
