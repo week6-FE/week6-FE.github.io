@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { __getBoard } from "../_redux/modules/postSlice";
@@ -8,7 +8,7 @@ import { __getBoard } from "../_redux/modules/postSlice";
 const MainContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 20px 70px;
+  padding: 20px 160px;
 `;
 
 const MainTitleContainer = styled.div`
@@ -25,23 +25,13 @@ const MainCardContainer = styled.div`
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-  row-gap: 30px;
-  column-gap: 10px;
+  row-gap: 50px;
+  column-gap: 60px;
   justify-content: center;
 `;
 
-const MainNickNameContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-const MainNickName = styled.span`
-  width: 100%;
-  height: 100%;
-`;
-
 const ImageTitleContainer = styled.div`
-  width: 100%;
+  width: 90%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -51,10 +41,16 @@ const ImageTitleContainer = styled.div`
   margin: 10px;
   border-radius: 10px;
   padding: 0 10px;
+  overflow: hidden;
+
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const ImageContainer = styled.div`
-  width: 100%;
+  width: 400px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -64,53 +60,24 @@ const ImageContainer = styled.div`
 const Main = () => {
   const userInfo = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(__getBoard());
   }, []);
 
   return (
     <>
+      <Header />
       <MainContainer>
-        {localStorage.getItem("refreshToken") === null ? (
-          <MainTitleContainer>
-            <Header />
-            <div style={{ marginBottom: "40px" }}>
-              <button>회원가입</button>
-              <button>로그인</button>
-            </div>
-          </MainTitleContainer>
-        ) : (
-          <MainTitleContainer>
-            <Header />
-            <div style={{ marginBottom: "40px" }}>
-              <span
-                style={{
-                  fontSize: "1.1em",
-                  fontWeight: "bold",
-                  letterSpacing: "2px",
-                }}
-              >
-                -{localStorage.getItem("nickname")}-
-              </span>
-              <span
-                style={{
-                  marginLeft: "10px",
-                  fontSize: "1.1em",
-                  fontWeight: "bold",
-                  color: "#63A1FF",
-                }}
-              >
-                환영합니다
-              </span>
-            </div>
-          </MainTitleContainer>
-        )}
-
         <MainCardContainer>
           {userInfo &&
             userInfo.map((user, index) => (
               <div key={index} style={{ width: "45%" }}>
-                <ImageTitleContainer>
+                <ImageTitleContainer
+                  onClick={() =>
+                    navigate(`/post/${user.id}`, { state: { userId: user.id } })
+                  }
+                >
                   <ImageContainer>
                     <img
                       src={user.imageUrl}
@@ -150,10 +117,7 @@ const Main = () => {
                       }}
                     >
                       <span style={{ letterSpacing: "2px" }}>
-                        {user.createdAt}
-                      </span>
-                      <span style={{ letterSpacing: "2px" }}>
-                        {user.createdAt}
+                        {String(user.createdAt).substring(0, 10)}
                       </span>
                     </div>
                   </div>

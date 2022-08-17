@@ -46,6 +46,19 @@ export const __getBoard = createAsyncThunk(
   }
 );
 
+export const __getDetailBoard = createAsyncThunk(
+  "get/getDetailBoard",
+  async (payload, thunkAPI) => {
+    try {
+      const response = await axios.get(`${DATA_URL}api/post/${payload}`);
+
+      return thunkAPI.fulfillWithValue(response.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   posts: [
     {
@@ -70,6 +83,9 @@ export const postSlice = createSlice({
   extraReducers: {
     [__getBoard.fulfilled]: (state, action) => {
       state.posts = action.payload.data;
+    },
+    [__getDetailBoard.fulfilled]: (state, action) => {
+      state.posts = action.payload;
     },
   },
 });
