@@ -15,6 +15,16 @@ export const __postUser = createAsyncThunk(
         // `${DATA_URL2}user`,
         registerUser
       );
+      if (registerUser.nickname.length === 0) {
+        return alert("닉네임을 입력해주세여");
+      } else if (registerUser.loginId.length === 0) {
+        return alert("아이디를 입력해주세여");
+      } else if (registerUser.password.length === 0) {
+        return alert("비밀번호를 입력해주세여");
+      } else {
+        alert("회원가입이 완료되었습니다");
+        window.location.replace("/login");
+      }
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       if (error.response.status === 409) {
@@ -57,9 +67,9 @@ export const __postLoginUser = createAsyncThunk(
       if (response.status === 200 || response.status === 201) {
         window.localStorage.setItem("accessToken", accessToken);
         window.localStorage.setItem("refreshToken", refreshToken);
+        window.localStorage.setItem("nickname", response.data.data.nickname);
         alert("로그인 성공");
-        // console.log(response.data.data.nickname);
-        // window.location.replace("/");
+        window.location.replace("/");
       }
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { __postUser } from "../_redux/modules/signup";
+import Header from "../components/Header";
 
 // 회원가입 page
 const SignUp = () => {
@@ -37,59 +38,83 @@ const SignUp = () => {
       setConfirmPassword("");
       return alert("비밀번호가 일치하지 않습니다");
     }
-    if (nickname.length === 0) {
-      return alert("닉네임을 입력해주세여");
-    } else if (loginId.length === 0) {
-      return alert("아이디를 입력해주세여");
-    } else if (password.length === 0) {
-      return alert("비밀번호를 입력해주세여");
-    } else {
-      alert("회원가입이 완료되었습니다");
-      navigation("/login");
-    }
   };
 
   let registerUser = { nickname, loginId, password };
 
   return (
     <>
-      <form onSubmit={handleChagneUser}>
-        {/* 닉네임 */}
-        <div>
-          <span>닉네임</span>
-          <input required onChange={onChangeNickname} value={nickname} />
-        </div>
-        {/* id */}
-        <div>
-          <span>이름</span>
-          <input required onChange={onChangeloginId} value={loginId} />
-        </div>
-        {/* 비밀번호 */}
-        <div>
-          <span>비밀번호</span>
-          <input
+      <Header />
+      <Title>Sign up</Title>
+      <InputWrap>
+        <form onSubmit={handleChagneUser}>
+          {/* 닉네임 */}
+          <InputText
+            placeholder="닉네임"
+            required
+            onChange={onChangeNickname}
+            value={nickname}
+          />
+          {/* id */}
+          <InputText
+            placeholder="아이디"
+            required
+            onChange={onChangeloginId}
+            value={loginId}
+          />
+          {/* 비밀번호 */}
+          <InputText
+            placeholder="비밀번호"
             required
             type="password"
             onChange={onChangepassword}
             value={password}
           />
-        </div>
-        {/* 비밀번호 확인 */}
-        <div>
-          <span>비밀번호 확인</span>
-          <input
+          {/* 비밀번호 확인 */}
+          <InputText
+            placeholder="비밀번호 확인"
             required
             type="password"
             onChange={onChangeConfimPassword}
             value={ConfirmPassword}
           />
-        </div>
-        <button>제출</button>
-        {nickname}
-        {loginId}
-      </form>
+          <SubmitBtn onClick={handleChagneUser}>제출</SubmitBtn>
+        </form>
+      </InputWrap>
     </>
   );
 };
+
+const Title = styled.div`
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  color: #63a1ff;
+  margin-bottom: 60px;
+`;
+
+const InputWrap = styled.div`
+  width: 376px;
+  margin: 0 auto;
+`;
+
+const InputText = styled.input`
+  width: 376px;
+  padding: 12px 16px;
+  border: 1px solid #63a1ff;
+  margin-bottom: 24px;
+  ::placeholder {
+    color: #b1d0ff;
+  }
+`;
+
+const SubmitBtn = styled.div`
+  width: 376px;
+  padding: 12px 0;
+  text-align: center;
+  background-color: #63a1ff;
+  color: #fff;
+  cursor: pointer;
+`;
 
 export default SignUp;

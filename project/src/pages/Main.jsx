@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import Header from "../components/Header";
 import { __getLoginUser } from "../_redux/modules/signup";
 
 const MainContainer = styled.div`
@@ -13,6 +14,7 @@ const MainContainer = styled.div`
 const MainTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 100%;
   padding: 20px;
@@ -75,8 +77,9 @@ const Main = () => {
     <>
       <MainContainer>
         <MainTitleContainer>
-          <span style={{ fontSize: "2em" }}>또스타그램</span>
+          <Header />
           <div>
+            {localStorage.getItem("nickname")}
             <button>회원가입</button>
             <button>로그인</button>
           </div>
