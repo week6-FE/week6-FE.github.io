@@ -1,36 +1,6 @@
 {
-  "user": [
-    {
-      "nickname": "qq",
-      "loginId": "qq",
-      "password": "qq",
-      "id": 1
-    },
-    {
-      "nickname": "ww",
-      "loginId": "ww",
-      "password": "ww",
-      "id": 2
-    },
-    {
-      "loginId": "ee",
-      "password": "wwee",
-      "id": 3
-    },
-    {
-      "loginId": "qq",
-      "password": "qq",
-      "id": 4
-    },
-    {
-      "loginId": "아이디",
-      "password": "qlalfqjsgh",
-      "id": 5
-    },
-    {
-      "loginId": "아이디",
-      "password": "qlalfqjsgh",
-      "id": 6
-    }
-  ]
+  "user": {
+    "loginId": "아이디",
+    "password": "qlalfqjsgh"
+  }
 }

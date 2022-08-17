@@ -1,7 +1,8 @@
+import { findNonSerializableValue } from "@reduxjs/toolkit";
 import React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { __postLoginUser } from "../_redux/modules/signup";
 
@@ -398,7 +399,6 @@ const Login = () => {
   }
 
   function moveMain() {
-    console.log("onclick");
     navigate("/");
   }
 
