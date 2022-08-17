@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import postReducer from "../modules/postSlice";
 import user from "../modules/signup";
-import todos from "../modules/board";
 
 const store = configureStore({
   reducer: {
     user,
-    // todos,
+    posts: postReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

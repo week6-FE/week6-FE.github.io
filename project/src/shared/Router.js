@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "../pages/Main";
 import Post from "../pages/Post";
@@ -9,13 +8,6 @@ import { Provider } from "react-redux";
 import store from "../_redux/config/configStore";
 
 const Router = () => {
-  const [isLogin, setIsLogin] = useState(false);
-
-  useEffect(() => {}, []);
-
-  function loginCallBack(login) {
-    setIsLogin(login);
-  }
   return (
     <Provider store={store}>
       <BrowserRouter>
