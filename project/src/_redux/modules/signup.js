@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
 const DATA_URL = "http://15.164.234.179/";
@@ -44,7 +43,7 @@ export const __getLoginUser = createAsyncThunk(
           `${DATA_URL}api/post`
           // `${DATA_URL2}user`
         )
-        .then((response) => {});
+        .then((response) => { });
       console.log(data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
@@ -52,6 +51,8 @@ export const __getLoginUser = createAsyncThunk(
     }
   }
 );
+
+// thunk랑 reducer 혼용 사용 조건
 
 export const __postLoginUser = createAsyncThunk(
   "user/postLoginUser",
@@ -96,8 +97,6 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     [__getLoginUser.fulfilled]: (state, action) => {
-      // state.isLoading = false;
-      // console.log(action.payload);
       state.user = action.payload;
       // console.log();
     },
@@ -105,16 +104,11 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    [__postUser.fulfilled]: (state, action) => {
-      // state.registerUser.push(action.payload);
-      // console.log(state);
-    },
     [__postLoginUser.fulfilled]: (state, action) => {
-      // console.log(action);
       state.user.push(action.payload);
     },
   },
 });
 
-export const {} = userSlice.actions;
+export const { } = userSlice.actions;
 export default userSlice.reducer;

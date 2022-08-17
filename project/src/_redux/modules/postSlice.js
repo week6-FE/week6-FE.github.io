@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+
+const DATA_URL = "http://15.164.234.179/";
 
 const register = (payload) => {
   const accessToken = localStorage.getItem("accessToken");
@@ -32,12 +34,24 @@ const register = (payload) => {
     });
 };
 
+export const __getBoard = createAsyncThunk(
+  "post/getBoard",
+  async (payload, thunkAPI) => {
+    try {
+      const data = await axios.get(`${DATA_URL}api/post`);
+      return thunkAPI.fulfillWithValue(data.data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   posts: [
     {
-      title: "",
       content: "",
       file: "",
+      title: "",
     },
   ],
 };
@@ -51,6 +65,11 @@ export const postSlice = createSlice({
       state.posts = action.payload;
       console.log(action.payload);
       register(action.payload);
+    },
+  },
+  extraReducers: {
+    [__getBoard.fulfilled]: (state, action) => {
+      state.posts = action.payload.data;
     },
   },
 });

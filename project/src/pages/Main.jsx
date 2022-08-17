@@ -1,9 +1,14 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
-import { __getLoginUser } from "../_redux/modules/signup";
+import { __getBoard } from "../_redux/modules/postSlice";
+
+
+// component
+import Button from '../components/Button';
+
 
 const MainContainer = styled.div`
   width: 100%;
@@ -80,12 +85,12 @@ const Main = () => {
           <Header />
           <div>
             {localStorage.getItem("nickname")}
-            <button>회원가입</button>
-            <button>로그인</button>
+            <Button btn="로그인" />
+            <Button btn="회원가입" />
           </div>
         </MainTitleContainer>
         <MainCardContainer>
-          {/* {userInfo.map((user) => (
+          {userInfo.map((user) => (
             <div key={user.id} style={{ width: "45%" }}>
               <ImageTitleContainer>
                 <ImageContainer>
@@ -136,7 +141,7 @@ const Main = () => {
                 </div>
               </ImageTitleContainer>
             </div>
-          ))} */}
+          ))}
         </MainCardContainer>
       </MainContainer>
     </>
