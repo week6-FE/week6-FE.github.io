@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
 const DATA_URL = "http://15.164.234.179/";
@@ -39,13 +38,10 @@ export const __getLoginUser = createAsyncThunk(
   "user/getLoginUser",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios
-        .get(
-          `${DATA_URL}api/post`
-          // `${DATA_URL2}user`
-        )
-        .then((response) => {});
-      console.log(data);
+      const data = await axios.get(
+        `${DATA_URL}api/post`
+        // `${DATA_URL2}user`
+      );
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -96,8 +92,6 @@ const userSlice = createSlice({
       state.isLoading = true;
     },
     [__getLoginUser.fulfilled]: (state, action) => {
-      // state.isLoading = false;
-      // console.log(action.payload);
       state.user = action.payload;
       // console.log();
     },
@@ -105,12 +99,7 @@ const userSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    [__postUser.fulfilled]: (state, action) => {
-      // state.registerUser.push(action.payload);
-      // console.log(state);
-    },
     [__postLoginUser.fulfilled]: (state, action) => {
-      // console.log(action);
       state.user.push(action.payload);
     },
   },

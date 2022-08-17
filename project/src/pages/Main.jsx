@@ -1,9 +1,9 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
-import { __getLoginUser } from "../_redux/modules/signup";
+import { __getBoard } from "../_redux/modules/postSlice";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -62,81 +62,104 @@ const ImageContainer = styled.div`
 `;
 
 const Main = () => {
-  // const [userInfo, setUserInfo] = useState({});
-  const userInfo = useSelector((state) => state.user);
+  const userInfo = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
-  // console.log(JSON.stringify(user));
-
-  console.log(userInfo);
-
   useEffect(() => {
-    dispatch(__getLoginUser());
+    dispatch(__getBoard());
   }, []);
 
   return (
     <>
       <MainContainer>
-        <MainTitleContainer>
-          <Header />
-          <div>
-            {localStorage.getItem("nickname")}
-            <button>회원가입</button>
-            <button>로그인</button>
-          </div>
-        </MainTitleContainer>
-        <MainCardContainer>
-          {/* {userInfo.map((user) => (
-            <div key={user.id} style={{ width: "45%" }}>
-              <ImageTitleContainer>
-                <ImageContainer>
-                  <img
-                    src={user.imageUrl}
-                    style={{
-                      width: "100%",
-                      height: "350px",
-                    }}
-                  />
-                </ImageContainer>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    width: "100%",
-                    alignItems: "center",
-                    paddingTop: "20px",
-                  }}
-                >
-                  <section
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <span style={{ fontSize: "1.4em", fontWeight: "bold" }}>
-                      {user.author}
-                    </span>
-                    <span>{user.title}</span>
-                  </section>
+        {localStorage.getItem("refreshToken") === null ? (
+          <MainTitleContainer>
+            <Header />
+            <div style={{ marginBottom: "40px" }}>
+              <button>회원가입</button>
+              <button>로그인</button>
+            </div>
+          </MainTitleContainer>
+        ) : (
+          <MainTitleContainer>
+            <Header />
+            <div style={{ marginBottom: "40px" }}>
+              <span
+                style={{
+                  fontSize: "1.1em",
+                  fontWeight: "bold",
+                  letterSpacing: "2px",
+                }}
+              >
+                -{localStorage.getItem("nickname")}-
+              </span>
+              <span
+                style={{
+                  marginLeft: "10px",
+                  fontSize: "1.1em",
+                  fontWeight: "bold",
+                  color: "#63A1FF",
+                }}
+              >
+                환영합니다
+              </span>
+            </div>
+          </MainTitleContainer>
+        )}
 
+        <MainCardContainer>
+          {userInfo &&
+            userInfo.map((user, index) => (
+              <div key={index} style={{ width: "45%" }}>
+                <ImageTitleContainer>
+                  <ImageContainer>
+                    <img
+                      src={user.imageUrl}
+                      style={{
+                        width: "100%",
+                        height: "350px",
+                      }}
+                    />
+                  </ImageContainer>
                   <div
                     style={{
                       display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-end",
+                      justifyContent: "space-between",
+                      width: "100%",
+                      alignItems: "center",
+                      paddingTop: "20px",
                     }}
                   >
-                    <span style={{ letterSpacing: "2px" }}>
-                      {user.createdAt.substr(0, 10)}
-                    </span>
-                    <span style={{ letterSpacing: "2px" }}>
-                      {user.createdAt.substr(11, 8)}
-                    </span>
+                    <section
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-start",
+                      }}
+                    >
+                      <span style={{ fontSize: "1.4em", fontWeight: "bold" }}>
+                        {user.author}
+                      </span>
+                      <span>{user.title}</span>
+                    </section>
+
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-end",
+                      }}
+                    >
+                      <span style={{ letterSpacing: "2px" }}>
+                        {user.createdAt}
+                      </span>
+                      <span style={{ letterSpacing: "2px" }}>
+                        {user.createdAt}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </ImageTitleContainer>
-            </div>
-          ))} */}
+                </ImageTitleContainer>
+              </div>
+            ))}
         </MainCardContainer>
       </MainContainer>
     </>
