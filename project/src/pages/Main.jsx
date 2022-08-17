@@ -11,15 +11,6 @@ const MainContainer = styled.div`
   padding: 20px 160px;
 `;
 
-const MainTitleContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-`;
-
 const MainCardContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -42,7 +33,6 @@ const ImageTitleContainer = styled.div`
   border-radius: 10px;
   padding: 0 10px;
   overflow: hidden;
-
   cursor: pointer;
   &:hover {
     transform: scale(1.1);

@@ -38,16 +38,21 @@ export const __getLoginUser = createAsyncThunk(
   "user/getLoginUser",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(
-        `${DATA_URL}api/post`
-        // `${DATA_URL2}user`
-      );
+      const data = await axios
+        .get(
+          `${DATA_URL}api/post`
+          // `${DATA_URL2}user`
+        )
+        .then((response) => { });
+      console.log(data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
+// thunk랑 reducer 혼용 사용 조건
 
 export const __postLoginUser = createAsyncThunk(
   "user/postLoginUser",
@@ -105,5 +110,5 @@ const userSlice = createSlice({
   },
 });
 
-export const {} = userSlice.actions;
+export const { } = userSlice.actions;
 export default userSlice.reducer;
