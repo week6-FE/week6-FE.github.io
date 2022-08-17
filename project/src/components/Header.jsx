@@ -20,7 +20,7 @@ const Header = () => {
         <>
             <HeaderWrap>
                 <img src={Logo} alt="logo" onClick={main} style={{ cursor: 'pointer' }} />
-                {/* <Button btn="로그인" /> */}
+                {/* <Button btn="삭제하기" /> */}
             </HeaderWrap>
         </>
     );

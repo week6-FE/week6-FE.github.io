@@ -5,6 +5,7 @@ import Post from '../pages/Post';
 import PostDetail from "../pages/PostDetail";
 import SignUp from '../pages/SignUp';
 import Login from '../pages/Login';
+import ModifyPost from '../pages/ModifyPost';
 
 const Router = () => {
     return (
@@ -14,6 +15,8 @@ const Router = () => {
                 <Route path="/" element={<Main />} />
                 {/* 게시글 작성 페이지 */}
                 <Route path="post" element={<Post />} />
+                {/* 게시글 수정 페이지 */}
+                {/* <Route path="post" element={<Post />} /> */}
                 {/* 게시글 상세 페이지 */}
                 <Route path="post/:id" element={<PostDetail />} />
                 {/* 로그인 페이지 */}

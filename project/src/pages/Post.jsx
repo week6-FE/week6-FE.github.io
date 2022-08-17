@@ -27,7 +27,7 @@ const Post = () => {
     const [uploadImageForm, setUploadImageForm] = useState(null);
 
     // post reducer
-    const posts = useSelector((state) => state.posts.posts);
+    const posts = useSelector((state) => state?.posts?.posts);
 
     // post useState
     const [post, setPost] = useState({
@@ -69,7 +69,7 @@ const Post = () => {
     const submitHandler = () => {
         dispatch(addPost(post));
         if (!title || !content || !previewImage) return alert('빈칸 없이 입력해 주세요');
-        navigate("/")
+        // navigate("/")
     }
 
     return (
