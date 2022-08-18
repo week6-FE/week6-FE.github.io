@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { __getBoard } from "../_redux/modules/postSlice";
+import { __postLoginUser } from "../_redux/modules/signup";
+import "./Main.css";
 
 const MainContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 20px 160px;
+  padding: 60px 160px;
+  background-attachment: fixed;
 `;
 
 const MainCardContainer = styled.div`
@@ -28,7 +31,7 @@ const ImageTitleContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid blue;
+  border: 5px solid rgba(99, 161, 255, 0.8);
   margin: 10px;
   border-radius: 10px;
   padding: 0 10px;
@@ -51,6 +54,7 @@ const Main = () => {
   const userInfo = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(__getBoard());
   }, []);
@@ -58,6 +62,7 @@ const Main = () => {
   return (
     <>
       <Header />
+
       <MainContainer>
         <MainCardContainer>
           {userInfo &&
@@ -65,7 +70,11 @@ const Main = () => {
               <div key={index} style={{ width: "45%" }}>
                 <ImageTitleContainer
                   onClick={() =>
-                    navigate(`/post/${user.id}`, { state: { userId: user.id } })
+                    navigate(`/post/${user.id}`, {
+                      state: {
+                        id: user.id,
+                      },
+                    })
                   }
                 >
                   <ImageContainer>
@@ -106,7 +115,9 @@ const Main = () => {
                         alignItems: "flex-end",
                       }}
                     >
-                      <span style={{ letterSpacing: "2px" }}>
+                      <span
+                        style={{ letterSpacing: "2px", fontStyle: "italic" }}
+                      >
                         {String(user.createdAt).substring(0, 10)}
                       </span>
                     </div>
