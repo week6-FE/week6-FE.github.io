@@ -5,13 +5,11 @@ import { useDispatch } from "react-redux";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 
-
 // image
 import AddImage from "../image/addImage.svg";
 import Logo from "../image/logo.svg";
 
 // components
-import Header from "../components/Header";
 import Button from "../components/Button";
 import { addPost } from "../_redux/modules/postSlice";
 
@@ -174,12 +172,11 @@ const InputContentsBox = styled.textarea`
 `;
 
 const PostHeader = styled.div`
- display: flex;
- align-items: center;
+  display: flex;
+  align-items: center;
   height: 80px;
   width: 1032px;
   margin: 0 auto;
 `;
-
 
 export default Post;

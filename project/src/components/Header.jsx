@@ -5,7 +5,6 @@ import "../App.css";
 // image
 import Logo from "../image/logo.svg";
 
-
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -30,8 +29,8 @@ const Header = () => {
   };
 
   const movePost = () => {
-    navigate("/post")
-  }
+    navigate("/post");
+  };
 
   return (
     <>
@@ -44,12 +43,8 @@ const Header = () => {
               onClick={main}
               style={{ cursor: "pointer" }}
             />
-            <div style={{ display: 'flex' }}>
-              <EmptyBtn
-                onClick={moveSignUp}
-              >
-                회원가입
-              </EmptyBtn>
+            <div style={{ display: "flex" }}>
+              <EmptyBtn onClick={moveSignUp}>회원가입</EmptyBtn>
               <FilledBtn onClick={moveLogin}>로그인</FilledBtn>
             </div>
           </HeaderInlineContainer>
@@ -71,7 +66,7 @@ const Header = () => {
               <span
                 style={{
                   fontSize: "1.1em",
-                  fontWeight: "bold"
+                  fontWeight: "bold",
                 }}
               >
                 {localStorage.getItem("nickname")}
@@ -87,13 +82,15 @@ const Header = () => {
                 님 환영합니다
               </span>
               <div style={{ display: "flex" }}>
-                <FilledBtn onClick={movePost} style={{ marginRight: "16px" }}>글쓰기</FilledBtn>
+                <FilledBtn onClick={movePost} style={{ marginRight: "16px" }}>
+                  글쓰기
+                </FilledBtn>
                 <EmptyBtn onClick={onClickLogout}>로그아웃</EmptyBtn>
               </div>
             </div>
-          </HeaderInlineContainer >
+          </HeaderInlineContainer>
         )}
-      </HeaderWrap >
+      </HeaderWrap>
     </>
   );
 };
@@ -122,32 +119,9 @@ const HeaderInlineContainer = styled.div`
   justify-content: space-between;
 `;
 
-const SignUpBtn = styled.div`
-  border: 1px solid #63A1FF;
-  padding: 6px 16px;
-  color: #63A1FF;
-  font-weight: 500;
-  cursor: pointer;
-`;
-
-const LoginBtn = styled.div`
-  padding: 6px 16px;
-  background-color: #63A1FF;
-  color: #fff;
-  font-weight: 500;
-  margin-left: 16px;
-  cursor: pointer;
-`;
-
-const BtnWrap = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-
 const FilledBtn = styled.div`
   padding: 6px 16px;
-  background-color: #63A1FF;
+  background-color: #63a1ff;
   color: #fff;
   cursor: pointer;
   font-weight: 500;
@@ -157,21 +131,11 @@ const FilledBtn = styled.div`
 
 const EmptyBtn = styled.div`
   padding: 6px 16px;
-  border: 1px solid #63A1FF;
-  color: #63A1FF;
+  border: 1px solid #63a1ff;
+  color: #63a1ff;
   cursor: pointer;
   font-weight: 500;
   border-radius: 2px;
 `;
 
-
-
-const LoginInfo = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const HeaderButton = styled.div`
-
-`;
 export default Header;

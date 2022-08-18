@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { Navigate, useNavigate } from "react-router-dom";
 
 const DATA_URL = "http://15.164.234.179/";
 
@@ -20,15 +19,9 @@ const register = (payload) => {
         "Content-Type": "multipart/form-data",
       },
     })
-    // axios({
-    //     method: 'post',
-    //     url: 'http://15.164.234.179/api/post',
-    //     headers: { "Authorization": accessToken, "Refresh-Token": refreshToken, 'Content-Type': 'multipart/form-data' },
-    //     data: frm
-    // })
     .then(function a(response) {
       alert("게시되었습니다.");
-      window.location.replace("/")
+      window.location.replace("/");
     })
     .catch(function (error) {
       console.log(error.response);
