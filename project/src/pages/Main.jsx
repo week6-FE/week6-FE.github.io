@@ -1,50 +1,44 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { __getBoard } from "../_redux/modules/postSlice";
-import { __postLoginUser } from "../_redux/modules/signup";
 import "./Main.css";
 
 const MainContainer = styled.div`
-  width: 100%;
+  width: 1032px;
+  margin: 0 auto;
   height: 100%;
-  padding: 60px 160px;
   background-attachment: fixed;
 `;
 
 const MainCardContainer = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-wrap: wrap;
   row-gap: 50px;
-  column-gap: 60px;
-  justify-content: center;
-`;
+  justify-content: space-between;
+  `;
 
 const ImageTitleContainer = styled.div`
-  width: 90%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 5px solid rgba(99, 161, 255, 0.8);
-  margin: 10px;
-  border-radius: 10px;
-  padding: 0 10px;
+  padding: 20px;
+  border: 1px solid #63A1FF;
+  border-radius: 2px;
   overflow: hidden;
   cursor: pointer;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.025);
+    transition: all 0.3s;
   }
 `;
 
 const ImageContainer = styled.div`
-  width: 400px;
-  height: 100%;
+  width: 464px;
+  height: 301px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,7 +51,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(__getBoard());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -67,7 +61,8 @@ const Main = () => {
         <MainCardContainer>
           {userInfo &&
             userInfo.map((user, index) => (
-              <div key={index} style={{ width: "45%" }}>
+              // post width
+              <div key={index} style={{ width: "48%" }}>
                 <ImageTitleContainer
                   onClick={() =>
                     navigate(`/post/${user.id}`, {
@@ -79,15 +74,18 @@ const Main = () => {
                 >
                   <ImageContainer>
                     <img
+                      alt=""
                       src={user.imageUrl}
+                      // post image sizing
                       style={{
-                        width: "100%",
-                        height: "350px",
+                        width: "98%",
+                        height: "100%",
                       }}
                     />
                   </ImageContainer>
                   <div
                     style={{
+                      // post text
                       display: "flex",
                       justifyContent: "space-between",
                       width: "100%",
@@ -96,12 +94,14 @@ const Main = () => {
                     }}
                   >
                     <section
+                      // ??
                       style={{
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "flex-start",
                       }}
                     >
+                      {/* font custom */}
                       <span style={{ fontSize: "1.4em", fontWeight: "bold" }}>
                         {user.author}
                       </span>
@@ -109,6 +109,7 @@ const Main = () => {
                     </section>
 
                     <div
+                      // ??
                       style={{
                         display: "flex",
                         flexDirection: "column",
@@ -116,6 +117,7 @@ const Main = () => {
                       }}
                     >
                       <span
+                        // post date
                         style={{ letterSpacing: "2px", fontStyle: "italic" }}
                       >
                         {String(user.createdAt).substring(0, 10)}

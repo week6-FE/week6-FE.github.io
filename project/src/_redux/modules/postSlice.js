@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const DATA_URL = "http://15.164.234.179/";
 
@@ -25,12 +26,18 @@ const register = (payload) => {
     //     headers: { "Authorization": accessToken, "Refresh-Token": refreshToken, 'Content-Type': 'multipart/form-data' },
     //     data: frm
     // })
+<<<<<<< HEAD
     .then(function a(response) {
-      console.log(response);
+      alert("게시되었습니다.");
+      Navigate('/');
     })
     .catch(function (error) {
       console.log(error.response);
     });
+=======
+    .then(function a(response) {})
+    .catch(function (error) {});
+>>>>>>> 13a81b32d5ff07e32a019240121fa447d0f92fe5
 };
 
 export const __getBoard = createAsyncThunk(
@@ -49,7 +56,7 @@ export const __getDetailBoard = createAsyncThunk(
   "get/getDetailBoard",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get(`${DATA_URL}api/post/${payload}`);
+      const response = await axios.get(`${DATA_URL}api/post/${payload.id}`);
 
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -75,7 +82,6 @@ export const postSlice = createSlice({
     // action => dispatch로 보낸 데이터를 받아오는 곳
     addPost: (state, action) => {
       state.posts = action.payload;
-      console.log(action.payload);
       register(action.payload);
     },
   },

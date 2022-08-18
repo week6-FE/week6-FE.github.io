@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "../App.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { __postLoginUser } from "../_redux/modules/signup";
@@ -16,7 +16,7 @@ const LoginContainer = styled.div`
   height: 100vh;
   padding: 100px 250px;
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 06);
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const LoginWrapper = styled.div`
@@ -385,8 +385,6 @@ const MainButton = styled.button`
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state);
-  console.log(user);
   const [loginId, setloginId] = useState("");
   const [password, setPassword] = useState("");
   const onChangeId = (e) => {
@@ -401,7 +399,6 @@ const Login = () => {
   function handleLogin(e) {
     e.preventDefault();
     dispatch(__postLoginUser(loginUser));
-    // navigate("/", { state: { userData: user.id } });
   }
 
   function moveMain() {

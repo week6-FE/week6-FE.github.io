@@ -1,37 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
-import { __postComments } from "../_redux/modules/comment";
 import { __getDetailBoard } from "../_redux/modules/postSlice";
 
 const PostDetail = () => {
   const userDetail = useSelector((state) => state.posts.posts.data);
   const { state } = useLocation();
-  const navigation = useNavigate();
-  const [content, setComment] = useState("");
 
   const moveMain = () => {
     window.location.replace("/");
-    // navigation("/");
   };
-
-  const commentInfo = { content, state };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(__getDetailBoard(state.id));
-  }, []);
-
-  useEffect(() => {
-    dispatch(__postComments(commentInfo));
-  }, []);
-
-  const onChangeComment = (e) => {
-    setComment(e.target.value);
-  };
+    dispatch(__getDetailBoard(state));
+  }, [dispatch, state]);
 
   return (
     <>
@@ -40,16 +26,9 @@ const PostDetail = () => {
         <DetailInlineWrapper>
           <TitleContainer>
             <MoveMainButton onClick={moveMain}>⬅</MoveMainButton>
-            <div
-              style={{
-                borderRadius: "10px",
-                padding: "10px",
-                marginBottom: "10px",
-                position: "relative",
-              }}
-            >
-              <span style={{ fontSize: "2em", fontWeight: "bold" }}>
-                NickName:&nbsp;
+            <div>
+              <span style={{ fontSize: "16px", fontWeight: "bold" }}>
+                &nbsp;
               </span>
               <DetailNickTitle>
                 {userDetail && userDetail.author}
@@ -58,10 +37,12 @@ const PostDetail = () => {
           </TitleContainer>
           <ImageContainer>
             <img
+              alt=""
               src={userDetail && userDetail.imageUrl}
+              // image sizing
               style={{
-                width: "500px",
-                height: "400px",
+                width: "912px",
+                height: "592px",
               }}
             />
           </ImageContainer>
@@ -75,14 +56,14 @@ const PostDetail = () => {
               paddingTop: "10px",
             }}
           >
-            <span style={{ fontStyle: "italic", fontSize: "1.2em" }}>
+            <span style={{ fontStyle: "italic", fontSize: "20px" }}>
               Time Created:&nbsp;
             </span>
             <span
               style={{
                 paddingRight: "20px",
                 fontStyle: "italic",
-                fontSize: "1.2em",
+                fontSize: "20px",
               }}
             >
               {String(userDetail && userDetail.createdAt).substring(11, 19)}
@@ -99,14 +80,6 @@ const PostDetail = () => {
             </div>
           </ContentContainer>
         </DetailInlineWrapper>
-
-        {/* comment */}
-        <CommentContainer>
-          <CommentForm>
-            <input type="text" onChange={onChangeComment} />
-            <button>작성</button>
-          </CommentForm>
-        </CommentContainer>
       </DetailContainer>
     </>
   );
@@ -126,32 +99,34 @@ const DetailContainer = styled.div`
 const DetailInlineWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px;
   height: 100%;
   width: 100%;
+<<<<<<< HEAD
+  border: 1px solid #63A1FF;
+  border-radius: 2px;
+=======
   border: 1px solid black;
   border-radius: 10px;
+  overflow: hidden;
   box-shadow: 3px 3px 3px 6px grey;
+>>>>>>> 13a81b32d5ff07e32a019240121fa447d0f92fe5
 `;
 
 const MoveMainButton = styled.button`
-  width: 100px;
-  height: 50px;
+width: 20px;
+height: 20px;
   cursor: pointer;
   font-size: 20px;
   font-weight: bold;
-  color: black;
-  background: white;
-  border-radius: 10px;
-  border: 1px solid rgba(105, 171, 224, 1);
-  box-shadow: 5px 5px 0 rgba(105, 171, 224, 1),
-    -5px -5px 0 rgba(105, 171, 224, 1), -5px 5px 0 rgba(105, 171, 224, 1),
-    5px -5px 0 rgba(105, 171, 224, 1);
+  color: #63A1FF;
+  border: none;
+  background-color: #fff;
   transition: 500ms ease-in-out;
   margin: 20px;
+  border-radius: 5px;
   &:hover {
-    box-shadow: 20px 5px 0 rgba(105, 171, 224, 1),
-      -20px -5px 0 rgba(105, 171, 224, 1);
+    box-shadow: 5px 5px 0 rgba(105, 171, 224, 0.6),
+      -5px -5px 0 rgba(105, 171, 224, 0.6);
   }
   &:focus {
     outline: none;
@@ -159,7 +134,6 @@ const MoveMainButton = styled.button`
 `;
 
 const ImageContainer = styled.div`
-  /* border: 5px solid black; */
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -167,16 +141,16 @@ const ImageContainer = styled.div`
 `;
 
 const TitleContainer = styled.div`
-  width: 100%;
-  height: 100%;
+width: 920px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 8px 0;
 `;
 
 const DetailNickTitle = styled.span`
-  font-size: 2em;
+  font-size: 20px;
   font-weight: bold;
   color: #63a1ff;
 `;
@@ -195,14 +169,5 @@ const ContentContainer = styled.div`
 const ContentTitle = styled.span`
   font-size: 1.5em;
 `;
-
-// comment
-
-const CommentContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-const CommentForm = styled.form``;
 
 export default PostDetail;

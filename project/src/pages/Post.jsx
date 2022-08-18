@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import GlobalStyle from "../GlobalStyle";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 
+
 // image
 import AddImage from "../image/addImage.svg";
+import Logo from "../image/logo.svg";
 
 // components
 import Header from "../components/Header";
@@ -24,9 +26,6 @@ const Post = () => {
   // image preview useState
   const [previewImage, setPreviewImage] = useState("");
   const [uploadImageForm, setUploadImageForm] = useState(null);
-
-  // post reducer
-  const posts = useSelector((state) => state.posts.posts);
 
   // post useState
   const [post, setPost] = useState({
@@ -50,8 +49,6 @@ const Post = () => {
     };
   };
 
-  const sendpreviewImage = previewImage[0];
-
   const postHandler = (e) => {
     setTitle(e.target.value);
     setContent(e.target.value);
@@ -65,20 +62,31 @@ const Post = () => {
 
   const submitHandler = () => {
     dispatch(addPost(post));
-    if (!title || !content || !previewImage)
+    if (!title || !content || !previewImage) {
       return alert("빈칸 없이 입력해 주세요");
+    }
+  };
+
+  const main = () => {
     navigate("/");
   };
 
   return (
     <>
       <GlobalStyle />
-      <Header />
+      <PostHeader>
+        <img
+          src={Logo}
+          alt="logo"
+          onClick={main}
+          style={{ cursor: "pointer" }}
+        />
+      </PostHeader>
       <PostWrap>
         <ImageBox>
           <img
             src={previewImage ? previewImage : AddImage}
-            alt="add-image"
+            alt=""
             style={{ marginBottom: "24px", width: "464px", height: "301px" }}
           />
           <div>
@@ -123,6 +131,7 @@ const PostWrap = styled.div`
   border: 1px solid #63a1ff;
   display: flex;
   justify-content: space-between;
+  margin-top: 40px;
 `;
 
 const ImageBox = styled.div`
@@ -163,5 +172,14 @@ const InputContentsBox = styled.textarea`
     color: #b1d0ff;
   }
 `;
+
+const PostHeader = styled.div`
+ display: flex;
+ align-items: center;
+  height: 80px;
+  width: 1032px;
+  margin: 0 auto;
+`;
+
 
 export default Post;
