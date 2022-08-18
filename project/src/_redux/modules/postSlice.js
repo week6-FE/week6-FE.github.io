@@ -28,7 +28,7 @@ const register = (payload) => {
     // })
     .then(function a(response) {
       alert("게시되었습니다.");
-      Navigate('/');
+      window.location.replace("/")
     })
     .catch(function (error) {
       console.log(error.response);

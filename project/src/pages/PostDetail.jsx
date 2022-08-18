@@ -70,12 +70,12 @@ const PostDetail = () => {
             </span>
           </div>
           <ContentContainer>
-            <div style={{ padding: "20px" }}>
-              <span style={{ fontSize: "2em" }}>Title:&nbsp;</span>
+            <div style={{ padding: "0 0 8px 20px" }}>
+              <div>&nbsp;</div>
               <DetailTitle>{userDetail && userDetail.title}</DetailTitle>
             </div>
             <div style={{ padding: "20px" }}>
-              <span style={{ fontSize: "1.5em" }}>Content:&nbsp;</span>
+              <span style={{ fontSize: "0px" }}>&nbsp;</span>
               <ContentTitle>{userDetail && userDetail.content}</ContentTitle>
             </div>
           </ContentContainer>
@@ -134,7 +134,7 @@ const ImageContainer = styled.div`
 `;
 
 const TitleContainer = styled.div`
-width: 920px;
+  width: 920px;
 
   display: flex;
   justify-content: space-between;
@@ -149,9 +149,10 @@ const DetailNickTitle = styled.span`
 `;
 
 const DetailTitle = styled.span`
-  font-size: 2em;
+  font-size: 28px;
   color: #63a1ff;
-  font-weight: bold;
+  font-weight: 600;
+  letter-spacing: -1px;
 `;
 
 const ContentContainer = styled.div`
@@ -160,7 +161,10 @@ const ContentContainer = styled.div`
 `;
 
 const ContentTitle = styled.span`
-  font-size: 1.5em;
+  font-size: 20px;
+  font-weight: 400;
+  color: #63A1FF;
 `;
+
 
 export default PostDetail;
