@@ -1,37 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
-import { __postComments } from "../_redux/modules/comment";
 import { __getDetailBoard } from "../_redux/modules/postSlice";
 
 const PostDetail = () => {
   const userDetail = useSelector((state) => state.posts.posts.data);
   const { state } = useLocation();
-  const navigation = useNavigate();
-  const [content, setComment] = useState("");
 
   const moveMain = () => {
     window.location.replace("/");
-    // navigation("/");
   };
-
-  const commentInfo = { content, state };
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(__getDetailBoard(state.id));
-  }, []);
-
-  useEffect(() => {
-    dispatch(__postComments(commentInfo));
-  }, []);
-
-  const onChangeComment = (e) => {
-    setComment(e.target.value);
-  };
+    dispatch(__getDetailBoard(state));
+  }, [dispatch, state]);
 
   return (
     <>
@@ -58,6 +44,7 @@ const PostDetail = () => {
           </TitleContainer>
           <ImageContainer>
             <img
+              alt=""
               src={userDetail && userDetail.imageUrl}
               style={{
                 width: "500px",
@@ -99,14 +86,6 @@ const PostDetail = () => {
             </div>
           </ContentContainer>
         </DetailInlineWrapper>
-
-        {/* comment */}
-        <CommentContainer>
-          <CommentForm>
-            <input type="text" onChange={onChangeComment} />
-            <button>작성</button>
-          </CommentForm>
-        </CommentContainer>
       </DetailContainer>
     </>
   );
@@ -131,6 +110,7 @@ const DetailInlineWrapper = styled.div`
   width: 100%;
   border: 1px solid black;
   border-radius: 10px;
+  overflow: hidden;
   box-shadow: 3px 3px 3px 6px grey;
 `;
 
@@ -159,7 +139,6 @@ const MoveMainButton = styled.button`
 `;
 
 const ImageContainer = styled.div`
-  /* border: 5px solid black; */
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -195,14 +174,5 @@ const ContentContainer = styled.div`
 const ContentTitle = styled.span`
   font-size: 1.5em;
 `;
-
-// comment
-
-const CommentContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-const CommentForm = styled.form``;
 
 export default PostDetail;

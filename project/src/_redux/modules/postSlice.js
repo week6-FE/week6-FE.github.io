@@ -25,12 +25,8 @@ const register = (payload) => {
     //     headers: { "Authorization": accessToken, "Refresh-Token": refreshToken, 'Content-Type': 'multipart/form-data' },
     //     data: frm
     // })
-    .then(function a(response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error.response);
-    });
+    .then(function a(response) {})
+    .catch(function (error) {});
 };
 
 export const __getBoard = createAsyncThunk(
@@ -49,7 +45,7 @@ export const __getDetailBoard = createAsyncThunk(
   "get/getDetailBoard",
   async (payload, thunkAPI) => {
     try {
-      const response = await axios.get(`${DATA_URL}api/post/${payload}`);
+      const response = await axios.get(`${DATA_URL}api/post/${payload.id}`);
 
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -75,7 +71,6 @@ export const postSlice = createSlice({
     // action => dispatch로 보낸 데이터를 받아오는 곳
     addPost: (state, action) => {
       state.posts = action.payload;
-      console.log(action.payload);
       register(action.payload);
     },
   },
