@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../components/Header";
 import { __getBoard } from "../_redux/modules/postSlice";
-import { __postLoginUser } from "../_redux/modules/signup";
 import "./Main.css";
 
 const MainContainer = styled.div`
@@ -57,7 +56,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(__getBoard());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -79,6 +78,7 @@ const Main = () => {
                 >
                   <ImageContainer>
                     <img
+                      alt=""
                       src={user.imageUrl}
                       style={{
                         width: "100%",

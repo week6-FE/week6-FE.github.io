@@ -13,6 +13,20 @@ const Header = () => {
 
   const main = () => {
     navigate("/");
+    window.location.reload();
+  };
+
+  const moveLogin = () => {
+    navigate("/login");
+  };
+
+  const moveSignUp = () => {
+    navigate("/signup");
+  };
+
+  const onClickLogout = () => {
+    localStorage.clear();
+    window.location.reload();
   };
 
   return (
@@ -27,8 +41,13 @@ const Header = () => {
               style={{ cursor: "pointer" }}
             />
             <div>
-              <button>회원가입</button>
-              <button>로그인</button>
+              <HeaderButton
+                onClick={moveSignUp}
+                style={{ marginRight: "30px" }}
+              >
+                회원가입
+              </HeaderButton>
+              <HeaderButton onClick={moveLogin}>로그인</HeaderButton>
             </div>
           </HeaderInlineContainer>
         ) : (
@@ -39,7 +58,13 @@ const Header = () => {
               onClick={main}
               style={{ cursor: "pointer" }}
             />
-            <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
               <span
                 style={{
                   fontSize: "1.1em",
@@ -59,6 +84,9 @@ const Header = () => {
               >
                 님 환영합니다
               </span>
+              <div style={{ paddingLeft: "30px" }}>
+                <HeaderButton onClick={onClickLogout}>로그아웃</HeaderButton>
+              </div>
             </div>
           </HeaderInlineContainer>
         )}
@@ -89,6 +117,30 @@ const HeaderInlineContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`;
+
+const HeaderButton = styled.button`
+  width: 80px;
+  height: 30px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid rgba(105, 171, 224, 1);
+  box-shadow: 5px 5px 0 rgba(105, 171, 224, 1),
+    -5px -5px 0 rgba(105, 171, 224, 1), -5px 5px 0 rgba(105, 171, 224, 1),
+    5px -5px 0 rgba(105, 171, 224, 1);
+  transition: 500ms ease-in-out;
+  &:hover {
+    box-shadow: 20px 5px 0 rgba(105, 171, 224, 1),
+      -20px -5px 0 rgba(105, 171, 224, 1);
+  }
+  &:focus {
+    outline: none;
+  }
 `;
 
 export default Header;

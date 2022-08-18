@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import GlobalStyle from "../GlobalStyle";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
 
@@ -25,9 +25,6 @@ const Post = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [uploadImageForm, setUploadImageForm] = useState(null);
 
-  // post reducer
-  const posts = useSelector((state) => state.posts.posts);
-
   // post useState
   const [post, setPost] = useState({
     title: "",
@@ -49,8 +46,6 @@ const Post = () => {
       }
     };
   };
-
-  const sendpreviewImage = previewImage[0];
 
   const postHandler = (e) => {
     setTitle(e.target.value);
@@ -78,7 +73,7 @@ const Post = () => {
         <ImageBox>
           <img
             src={previewImage ? previewImage : AddImage}
-            alt="add-image"
+            alt=""
             style={{ marginBottom: "24px", width: "464px", height: "301px" }}
           />
           <div>

@@ -1,16 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { __postUser } from "../_redux/modules/signup";
 import Header from "../components/Header";
 
 // 회원가입 page
 const SignUp = () => {
-  const navigation = useNavigate();
-  const userInfo = useSelector((state) => state);
-  console.log(userInfo);
   const dispatch = useDispatch();
   const [nickname, setNickname] = useState("");
   const [loginId, setloginId] = useState("");
@@ -36,24 +32,27 @@ const SignUp = () => {
   const handleChagneUser = (e) => {
     e.preventDefault();
     dispatch(__postUser(registerUser));
+
     if (password !== ConfirmPassword) {
       setConfirmPassword("");
       return alert("비밀번호가 일치하지 않습니다");
     }
   };
 
-  let registerUser = { nickname, loginId, password };
+  let registerUser = { nickname, loginId, password, ConfirmPassword };
 
   return (
     <>
       <Header />
       <Title>Sign up</Title>
       <InputWrap>
-        <form onSubmit={handleChagneUser}>
+        <SignUpForm onSubmit={handleChagneUser}>
           {/* 닉네임 */}
           <InputText
             placeholder="닉네임"
             required
+            minlength="3"
+            maxlength="8"
             onChange={onChangeNickname}
             value={nickname}
           />
@@ -81,7 +80,7 @@ const SignUp = () => {
             value={ConfirmPassword}
           />
           <SubmitBtn onClick={handleChagneUser}>제출</SubmitBtn>
-        </form>
+        </SignUpForm>
       </InputWrap>
     </>
   );
@@ -118,5 +117,7 @@ const SubmitBtn = styled.div`
   color: #fff;
   cursor: pointer;
 `;
+
+const SignUpForm = styled.form``;
 
 export default SignUp;
