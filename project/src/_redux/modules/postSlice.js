@@ -11,7 +11,6 @@ const register = (payload) => {
   frm.append("title", payload.title);
   frm.append("content", payload.content);
   frm.append("file", payload.file);
-
   axios
     .post("http://15.164.234.179/api/post", frm, {
       headers: {

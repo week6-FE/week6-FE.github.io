@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import "../App.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { __postLoginUser } from "../_redux/modules/signup";
+import "./Main.css";
 
 const LoginContainer = styled.div`
   display: flex;
@@ -14,9 +15,8 @@ const LoginContainer = styled.div`
   width: 100%;
   height: 100vh;
   padding: 100px 250px;
-  /* background: #e8cbc0;
-  background: -webkit-linear-gradient(to right, #636fa4, #e8cbc0);
-  background: linear-gradient(to right, #636fa4, #e8cbc0); */
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 06);
 `;
 
 const LoginWrapper = styled.div`
@@ -26,6 +26,7 @@ const LoginWrapper = styled.div`
   height: 100%;
   width: 100%;
   border-radius: 10px;
+  background-color: white;
   box-shadow: 3px 10px 6px 10px rgba(85, 84, 84, 0.8);
 `;
 
@@ -384,6 +385,8 @@ const MainButton = styled.button`
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state);
+  console.log(user);
   const [loginId, setloginId] = useState("");
   const [password, setPassword] = useState("");
   const onChangeId = (e) => {
@@ -393,9 +396,12 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
+  const loginUser = { loginId, password };
+
   function handleLogin(e) {
     e.preventDefault();
     dispatch(__postLoginUser(loginUser));
+    // navigate("/", { state: { userData: user.id } });
   }
 
   function moveMain() {
@@ -406,12 +412,41 @@ const Login = () => {
     navigate("/signup");
   }
 
-  const loginUser = { loginId, password };
-
   return (
     <>
       <LoginContainer>
         <LoginWrapper>
+          <div className="night" style={{ marginBottom: "30%" }}>
+            <div
+              className="shooting_star"
+              style={{ margin: "12.500em, -32.500em" }}
+            ></div>
+            <div
+              className="shooting_star"
+              style={{
+                margin: "20.625em ,-4.125em",
+              }}
+            ></div>
+            <div
+              className="shooting_star"
+              style={{
+                margin: "14.500em ,27.500em",
+              }}
+            ></div>
+
+            <div
+              className="shooting_star"
+              style={{ margin: "-5em ,26.500em" }}
+            ></div>
+            <div
+              className="shooting_star"
+              style={{ margin: "14.500em,6em" }}
+            ></div>
+            <div
+              className="shooting_star"
+              style={{ margin: "17.500em, 17.500em" }}
+            ></div>
+          </div>
           <LoginTitleContainer>
             <LoginTitleInnerWrapper>
               <LoginTitle className="nth-1">또</LoginTitle>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { __postUser } from "../_redux/modules/signup";
 import Header from "../components/Header";
@@ -9,6 +9,8 @@ import Header from "../components/Header";
 // 회원가입 page
 const SignUp = () => {
   const navigation = useNavigate();
+  const userInfo = useSelector((state) => state);
+  console.log(userInfo);
   const dispatch = useDispatch();
   const [nickname, setNickname] = useState("");
   const [loginId, setloginId] = useState("");
