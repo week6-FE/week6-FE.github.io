@@ -10,7 +10,7 @@ import store from "../_redux/config/configStore";
 const Router = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           {/* 메인페이지 */}
           <Route path="/" element={<Main />} />
