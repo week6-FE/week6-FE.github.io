@@ -101,15 +101,8 @@ const DetailInlineWrapper = styled.div`
   flex-direction: column;
   height: 100%;
   width: 100%;
-<<<<<<< HEAD
   border: 1px solid #63A1FF;
   border-radius: 2px;
-=======
-  border: 1px solid black;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 3px 3px 3px 6px grey;
->>>>>>> 13a81b32d5ff07e32a019240121fa447d0f92fe5
 `;
 
 const MoveMainButton = styled.button`

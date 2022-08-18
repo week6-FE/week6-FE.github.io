@@ -19,6 +19,7 @@ const Btn = styled.label`
     border: 1px solid #63A1FF;
     color: #63A1FF;
     cursor: pointer;
+    font-weight: 600;
 `;
 
 export default Button;

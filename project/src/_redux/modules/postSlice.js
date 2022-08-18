@@ -26,7 +26,6 @@ const register = (payload) => {
     //     headers: { "Authorization": accessToken, "Refresh-Token": refreshToken, 'Content-Type': 'multipart/form-data' },
     //     data: frm
     // })
-<<<<<<< HEAD
     .then(function a(response) {
       alert("게시되었습니다.");
       Navigate('/');
@@ -34,10 +33,6 @@ const register = (payload) => {
     .catch(function (error) {
       console.log(error.response);
     });
-=======
-    .then(function a(response) {})
-    .catch(function (error) {});
->>>>>>> 13a81b32d5ff07e32a019240121fa447d0f92fe5
 };
 
 export const __getBoard = createAsyncThunk(
