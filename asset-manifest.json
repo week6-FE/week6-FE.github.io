@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/github.io/week6-FE.github.io/static/css/main.985bd28f.css",
-    "main.js": "/github.io/week6-FE.github.io/static/js/main.efd73c08.js",
-    "static/media/addImage.svg": "/github.io/week6-FE.github.io/static/media/addImage.48e6cb5f701aa5c17b732888a46166e7.svg",
-    "static/media/logo.svg": "/github.io/week6-FE.github.io/static/media/logo.8c0aa647fb2d3be00c359aedbec2ecea.svg",
-    "index.html": "/github.io/week6-FE.github.io/index.html",
-    "main.985bd28f.css.map": "/github.io/week6-FE.github.io/static/css/main.985bd28f.css.map",
-    "main.efd73c08.js.map": "/github.io/week6-FE.github.io/static/js/main.efd73c08.js.map"
+    "main.css": "/week6-FE.github.io/static/css/main.985bd28f.css",
+    "main.js": "/week6-FE.github.io/static/js/main.fe076e9c.js",
+    "static/media/addImage.svg": "/week6-FE.github.io/static/media/addImage.48e6cb5f701aa5c17b732888a46166e7.svg",
+    "static/media/logo.svg": "/week6-FE.github.io/static/media/logo.8c0aa647fb2d3be00c359aedbec2ecea.svg",
+    "index.html": "/week6-FE.github.io/index.html",
+    "main.985bd28f.css.map": "/week6-FE.github.io/static/css/main.985bd28f.css.map",
+    "main.fe076e9c.js.map": "/week6-FE.github.io/static/js/main.fe076e9c.js.map"
   },
   "entrypoints": [
     "static/css/main.985bd28f.css",
-    "static/js/main.efd73c08.js"
+    "static/js/main.fe076e9c.js"
   ]
 }
